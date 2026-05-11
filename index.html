@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    /* ===== RESET & BASE ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --gold: #C9A84C;
@@ -34,8 +33,6 @@
       line-height: 1.7;
       overflow-x: hidden;
     }
-
-    /* ===== UTILITIES ===== */
     .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
     .container--narrow { max-width: 780px; margin: 0 auto; padding: 0 24px; }
     .gold { color: var(--gold); }
@@ -43,15 +40,8 @@
     .section { padding: 90px 0; }
     .section--dark { background: var(--dark); }
     .section--darker { background: var(--dark-2); }
-    .divider {
-      width: 60px; height: 3px;
-      background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
-      margin: 0 auto 32px;
-      border-radius: 2px;
-    }
+    .divider { width: 60px; height: 3px; background: linear-gradient(90deg, var(--gold-dark), var(--gold-light)); margin: 0 auto 32px; border-radius: 2px; }
     .divider--left { margin: 0 0 32px; }
-
-    /* ===== TYPOGRAPHY ===== */
     h1, h2, h3, h4 { font-family: var(--font-serif); line-height: 1.2; }
     h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 900; }
     h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; }
@@ -59,1086 +49,374 @@
     p { color: var(--gray-light); }
     .lead { font-size: 1.15rem; color: var(--off-white); }
     .caption { font-size: 0.85rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; }
-
-    /* ===== BUTTONS ===== */
-    .btn {
-      display: inline-block;
-      font-family: var(--font-sans);
-      font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: 0.04em;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-    }
+    .btn { display: inline-block; font-family: var(--font-sans); font-weight: 700; font-size: 1rem; letter-spacing: 0.04em; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s, background 0.2s; }
     .btn:hover { transform: translateY(-2px); }
-    .btn--gold {
-      background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
-      color: var(--black);
-      padding: 18px 48px;
-      font-size: 1.1rem;
-      box-shadow: 0 4px 24px rgba(201, 168, 76, 0.35);
-    }
+    .btn--gold { background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light)); color: var(--black); padding: 18px 48px; font-size: 1.1rem; box-shadow: 0 4px 24px rgba(201, 168, 76, 0.35); }
     .btn--gold:hover { box-shadow: 0 8px 36px rgba(201, 168, 76, 0.55); }
-    .btn--outline {
-      background: transparent;
-      color: var(--gold);
-      border: 2px solid var(--gold);
-      padding: 14px 36px;
-    }
+    .btn--outline { background: transparent; color: var(--gold); border: 2px solid var(--gold); padding: 14px 36px; }
     .btn--outline:hover { background: rgba(201, 168, 76, 0.1); }
     .btn--lg { padding: 22px 60px; font-size: 1.2rem; }
-
-    /* ===== NAV ===== */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(10, 10, 10, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
-      padding: 16px 0;
-    }
-    .nav-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      max-width: 1100px; margin: 0 auto; padding: 0 24px;
-    }
-    .nav-logo {
-      font-family: var(--font-serif);
-      font-size: 1.3rem;
-      color: var(--white);
-      text-decoration: none;
-      font-weight: 700;
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(10, 10, 10, 0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201, 168, 76, 0.15); padding: 16px 0; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .nav-logo { font-family: var(--font-serif); font-size: 1.3rem; color: var(--white); text-decoration: none; font-weight: 700; }
     .nav-logo span { color: var(--gold); }
     .nav-cta { display: none; }
     @media (min-width: 640px) { .nav-cta { display: inline-block; } }
-
-    /* ===== HERO ===== */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 140px 0 80px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 60% 50%, rgba(201, 168, 76, 0.07) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 80% at 0% 100%, rgba(201, 168, 76, 0.05) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(201, 168, 76, 0.12);
-      border: 1px solid rgba(201, 168, 76, 0.3);
-      color: var(--gold-light);
-      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 8px 20px; border-radius: 100px;
-      margin-bottom: 28px;
-    }
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 140px 0 80px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 60% 50%, rgba(201, 168, 76, 0.07) 0%, transparent 70%), radial-gradient(ellipse 50% 80% at 0% 100%, rgba(201, 168, 76, 0.05) 0%, transparent 60%); pointer-events: none; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(201, 168, 76, 0.12); border: 1px solid rgba(201, 168, 76, 0.3); color: var(--gold-light); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 20px; border-radius: 100px; margin-bottom: 28px; }
     .hero-badge::before { content: '★'; }
     .hero h1 { margin-bottom: 24px; }
     .hero h1 em { font-style: italic; color: var(--gold); }
-    .hero-sub {
-      font-size: 1.15rem;
-      color: var(--off-white);
-      max-width: 680px;
-      margin-bottom: 44px;
-      line-height: 1.8;
-    }
+    .hero-sub { font-size: 1.15rem; color: var(--off-white); max-width: 680px; margin-bottom: 44px; line-height: 1.8; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-bottom: 56px; }
-    .hero-trust {
-      display: flex; flex-wrap: wrap; gap: 28px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
+    .hero-trust { display: flex; flex-wrap: wrap; gap: 28px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); }
     .trust-item { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: var(--gray); }
     .trust-item span { font-size: 1.1rem; }
-    .hero-scroll-hint {
-      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-      color: var(--gray); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
-      animation: bounce 2s infinite;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(6px); }
-    }
-
-    /* ===== PAIN SECTION ===== */
-    .pain-grid {
-      display: grid; grid-template-columns: 1fr;
-      gap: 20px; margin-top: 48px;
-    }
+    .hero-scroll-hint { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--gray); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; animation: bounce 2s infinite; }
+    @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+    .pain-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 48px; }
     @media (min-width: 640px) { .pain-grid { grid-template-columns: 1fr 1fr; } }
     @media (min-width: 900px) { .pain-grid { grid-template-columns: 1fr 1fr 1fr; } }
-    .pain-card {
-      background: var(--dark-2);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 12px;
-      padding: 28px 24px;
-      position: relative;
-      overflow: hidden;
-    }
-    .pain-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent);
-    }
+    .pain-card { background: var(--dark-2); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 28px 24px; position: relative; overflow: hidden; }
+    .pain-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent); }
     .pain-icon { font-size: 1.8rem; margin-bottom: 14px; display: block; }
     .pain-card h3 { font-size: 1rem; font-family: var(--font-sans); font-weight: 600; color: var(--white); margin-bottom: 8px; }
     .pain-card p { font-size: 0.9rem; color: var(--gray); }
-
-    /* ===== PROMISE SECTION ===== */
-    .promise-box {
-      background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03));
-      border: 1px solid rgba(201,168,76,0.25);
-      border-radius: 16px;
-      padding: 56px 48px;
-      text-align: center;
-      margin-top: 48px;
-      position: relative;
-      overflow: hidden;
-    }
-    .promise-box::before {
-      content: '❝';
-      position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
-      font-size: 6rem; color: rgba(201,168,76,0.08);
-      font-family: Georgia, serif; line-height: 1;
-      pointer-events: none;
-    }
-    .promise-box blockquote {
-      font-family: var(--font-serif);
-      font-size: clamp(1.3rem, 3vw, 2rem);
-      color: var(--off-white);
-      line-height: 1.5;
-      margin-bottom: 24px;
-    }
+    .promise-box { background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03)); border: 1px solid rgba(201,168,76,0.25); border-radius: 16px; padding: 56px 48px; text-align: center; margin-top: 48px; position: relative; overflow: hidden; }
+    .promise-box::before { content: '\275D'; position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 6rem; color: rgba(201,168,76,0.08); font-family: Georgia, serif; line-height: 1; pointer-events: none; }
+    .promise-box blockquote { font-family: var(--font-serif); font-size: clamp(1.3rem, 3vw, 2rem); color: var(--off-white); line-height: 1.5; margin-bottom: 24px; }
     .promise-box blockquote strong { color: var(--gold); }
     .promise-author { color: var(--gray); font-size: 0.9rem; }
-
-    /* ===== DREAMS SECTION ===== */
-    .dreams-grid {
-      display: grid; gap: 16px;
-      grid-template-columns: 1fr;
-      margin-top: 48px;
-    }
+    .dreams-grid { display: grid; gap: 16px; grid-template-columns: 1fr; margin-top: 48px; }
     @media (min-width: 700px) { .dreams-grid { grid-template-columns: 1fr 1fr; } }
-    .dream-item {
-      display: flex; align-items: flex-start; gap: 16px;
-      background: var(--dark-2);
-      border-radius: 12px;
-      padding: 24px;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-    .dream-icon {
-      width: 44px; height: 44px; flex-shrink: 0;
-      background: rgba(201,168,76,0.12);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem;
-    }
+    .dream-item { display: flex; align-items: flex-start; gap: 16px; background: var(--dark-2); border-radius: 12px; padding: 24px; border: 1px solid rgba(255,255,255,0.05); }
+    .dream-icon { width: 44px; height: 44px; flex-shrink: 0; background: rgba(201,168,76,0.12); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
     .dream-item h4 { font-size: 1rem; font-family: var(--font-sans); font-weight: 600; color: var(--white); margin-bottom: 4px; }
     .dream-item p { font-size: 0.88rem; color: var(--gray); }
-
-    /* ===== SYSTEM SECTION ===== */
-    .system-steps {
-      display: flex; flex-direction: column; gap: 0;
-      margin-top: 56px; position: relative;
-    }
-    .system-steps::before {
-      content: ''; position: absolute;
-      left: 28px; top: 0; bottom: 0; width: 2px;
-      background: linear-gradient(to bottom, var(--gold-dark), transparent);
-    }
+    .system-steps { display: flex; flex-direction: column; gap: 0; margin-top: 56px; position: relative; }
+    .system-steps::before { content: ''; position: absolute; left: 28px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--gold-dark), transparent); }
     @media (min-width: 700px) { .system-steps::before { left: 36px; } }
-    .step {
-      display: flex; gap: 24px; align-items: flex-start;
-      padding-bottom: 40px; position: relative;
-    }
-    .step-num {
-      width: 56px; height: 56px; flex-shrink: 0;
-      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 900; font-size: 1.1rem; color: var(--black);
-      position: relative; z-index: 1;
-      box-shadow: 0 0 0 4px var(--black), 0 0 0 5px rgba(201,168,76,0.25);
-    }
+    .step { display: flex; gap: 24px; align-items: flex-start; padding-bottom: 40px; position: relative; }
+    .step-num { width: 56px; height: 56px; flex-shrink: 0; background: linear-gradient(135deg, var(--gold-dark), var(--gold)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.1rem; color: var(--black); position: relative; z-index: 1; box-shadow: 0 0 0 4px var(--black), 0 0 0 5px rgba(201,168,76,0.25); }
     .step-body h3 { font-size: 1.15rem; margin-bottom: 8px; color: var(--white); }
     .step-body p { font-size: 0.92rem; color: var(--gray-light); }
-    .step-body .step-tag {
-      display: inline-block;
-      background: rgba(201,168,76,0.1);
-      color: var(--gold);
-      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; padding: 3px 10px; border-radius: 4px;
-      margin-bottom: 10px;
-    }
-
-    /* ===== MODULES SECTION ===== */
-    .modules-grid {
-      display: grid; gap: 20px;
-      grid-template-columns: 1fr;
-      margin-top: 48px;
-    }
+    .step-body .step-tag { display: inline-block; background: rgba(201,168,76,0.1); color: var(--gold); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; margin-bottom: 10px; }
+    .modules-grid { display: grid; gap: 20px; grid-template-columns: 1fr; margin-top: 48px; }
     @media (min-width: 640px) { .modules-grid { grid-template-columns: 1fr 1fr; } }
     @media (min-width: 900px) { .modules-grid { grid-template-columns: 1fr 1fr 1fr; } }
-    .module-card {
-      background: var(--dark-3);
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.07);
-      padding: 32px 28px;
-      transition: border-color 0.3s, transform 0.3s;
-    }
+    .module-card { background: var(--dark-3); border-radius: 14px; border: 1px solid rgba(255,255,255,0.07); padding: 32px 28px; transition: border-color 0.3s, transform 0.3s; }
     .module-card:hover { border-color: rgba(201,168,76,0.35); transform: translateY(-4px); }
-    .module-num {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--gold);
-      margin-bottom: 12px; display: block;
-    }
+    .module-num { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
     .module-card h3 { font-size: 1.05rem; color: var(--white); margin-bottom: 12px; font-family: var(--font-sans); font-weight: 700; }
     .module-list { list-style: none; }
-    .module-list li {
-      font-size: 0.88rem; color: var(--gray);
-      padding: 5px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      display: flex; align-items: flex-start; gap: 8px;
-    }
+    .module-list li { font-size: 0.88rem; color: var(--gray); padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; align-items: flex-start; gap: 8px; }
     .module-list li:last-child { border-bottom: none; }
-    .module-list li::before { content: '▸'; color: var(--gold); flex-shrink: 0; font-size: 0.8rem; margin-top: 2px; }
-
-    /* ===== TOOLS SECTION ===== */
-    .tools-grid {
-      display: flex; flex-wrap: wrap; gap: 14px;
-      margin-top: 40px; justify-content: center;
-    }
-    .tool-chip {
-      display: flex; align-items: center; gap: 8px;
-      background: var(--dark-2);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 100px;
-      padding: 10px 20px;
-      font-size: 0.88rem; font-weight: 500; color: var(--off-white);
-    }
+    .module-list li::before { content: '\25B8'; color: var(--gold); flex-shrink: 0; font-size: 0.8rem; margin-top: 2px; }
+    .tools-grid { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px; justify-content: center; }
+    .tool-chip { display: flex; align-items: center; gap: 8px; background: var(--dark-2); border: 1px solid rgba(255,255,255,0.08); border-radius: 100px; padding: 10px 20px; font-size: 0.88rem; font-weight: 500; color: var(--off-white); }
     .tool-chip span { font-size: 1.1rem; }
-
-    /* ===== STRATEGIES SECTION ===== */
-    .strategies-grid {
-      display: grid; gap: 24px;
-      grid-template-columns: 1fr;
-      margin-top: 48px;
-    }
+    .strategies-grid { display: grid; gap: 24px; grid-template-columns: 1fr; margin-top: 48px; }
     @media (min-width: 700px) { .strategies-grid { grid-template-columns: 1fr 1fr; } }
-    .strategy-card {
-      border-radius: 16px;
-      padding: 36px 32px;
-      border: 1px solid rgba(201,168,76,0.2);
-    }
+    .strategy-card { border-radius: 16px; padding: 36px 32px; border: 1px solid rgba(201,168,76,0.2); }
     .strategy-card--a { background: linear-gradient(135deg, rgba(201,168,76,0.07), rgba(201,168,76,0.02)); }
     .strategy-card--b { background: var(--dark-2); }
-    .strategy-badge {
-      display: inline-block;
-      padding: 4px 14px; border-radius: 4px;
-      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-      margin-bottom: 20px;
-    }
+    .strategy-badge { display: inline-block; padding: 4px 14px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px; }
     .strategy-badge--a { background: var(--gold); color: var(--black); }
     .strategy-badge--b { background: rgba(255,255,255,0.08); color: var(--gray-light); }
     .strategy-card h3 { color: var(--white); margin-bottom: 14px; font-size: 1.3rem; }
-    .strategy-flow {
-      display: flex; flex-direction: column; gap: 10px; margin-top: 20px;
-    }
-    .strategy-flow-step {
-      display: flex; align-items: center; gap: 12px;
-      font-size: 0.9rem; color: var(--gray-light);
-    }
-    .flow-arrow {
-      font-size: 0.75rem; color: var(--gold); margin: -4px 0;
-      text-align: left; padding-left: 18px;
-    }
-    .flow-bubble {
-      background: rgba(201,168,76,0.1);
-      border-radius: 6px; padding: 6px 14px;
-      font-size: 0.85rem; color: var(--gold-light); font-weight: 500;
-    }
-
-    /* ===== BONUS / INCLUDED ===== */
-    .included-grid {
-      display: grid; gap: 20px;
-      grid-template-columns: 1fr;
-      margin-top: 48px;
-    }
+    .strategy-flow { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+    .strategy-flow-step { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--gray-light); }
+    .flow-arrow { font-size: 0.75rem; color: var(--gold); margin: -4px 0; text-align: left; padding-left: 18px; }
+    .flow-bubble { background: rgba(201,168,76,0.1); border-radius: 6px; padding: 6px 14px; font-size: 0.85rem; color: var(--gold-light); font-weight: 500; }
+    .included-grid { display: grid; gap: 20px; grid-template-columns: 1fr; margin-top: 48px; }
     @media (min-width: 640px) { .included-grid { grid-template-columns: 1fr 1fr; } }
-    .included-item {
-      display: flex; align-items: flex-start; gap: 18px;
-      background: var(--dark-2);
-      border-radius: 12px; padding: 24px;
-      border: 1px solid rgba(201,168,76,0.15);
-    }
-    .included-icon {
-      width: 48px; height: 48px; flex-shrink: 0;
-      background: rgba(201,168,76,0.12);
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem;
-    }
+    .included-item { display: flex; align-items: flex-start; gap: 18px; background: var(--dark-2); border-radius: 12px; padding: 24px; border: 1px solid rgba(201,168,76,0.15); }
+    .included-icon { width: 48px; height: 48px; flex-shrink: 0; background: rgba(201,168,76,0.12); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
     .included-item h4 { font-size: 1rem; font-family: var(--font-sans); font-weight: 700; color: var(--white); margin-bottom: 4px; }
     .included-item p { font-size: 0.88rem; color: var(--gray); }
-
-    /* ===== MRR SECTION ===== */
-    .mrr-box {
-      background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.04));
-      border: 1px solid rgba(201,168,76,0.3);
-      border-radius: 16px; padding: 48px; text-align: center;
-      margin-top: 48px;
-    }
+    .mrr-box { background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.04)); border: 1px solid rgba(201,168,76,0.3); border-radius: 16px; padding: 48px; text-align: center; margin-top: 48px; }
     .mrr-box h2 { margin-bottom: 16px; }
     .mrr-box p { max-width: 620px; margin: 0 auto 28px; font-size: 1rem; }
-    .mrr-steps {
-      display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 32px 0;
-    }
-    .mrr-step {
-      background: rgba(0,0,0,0.35);
-      border-radius: 10px; padding: 20px 24px; min-width: 180px;
-      flex: 1;
-    }
+    .mrr-steps { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 32px 0; }
+    .mrr-step { background: rgba(0,0,0,0.35); border-radius: 10px; padding: 20px 24px; min-width: 180px; flex: 1; }
     .mrr-step .num { font-family: var(--font-serif); font-size: 2.5rem; color: var(--gold); font-weight: 900; }
     .mrr-step p { font-size: 0.88rem; color: var(--gray-light); margin-top: 6px; }
-
-    /* ===== PRICING SECTION ===== */
-    .price-card {
-      background: var(--dark-2);
-      border: 2px solid var(--gold);
-      border-radius: 20px; max-width: 560px; margin: 48px auto 0;
-      overflow: hidden;
-      box-shadow: 0 0 60px rgba(201,168,76,0.12);
-    }
-    .price-card-top {
-      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-      padding: 28px 40px; text-align: center;
-    }
+    .price-card { background: var(--dark-2); border: 2px solid var(--gold); border-radius: 20px; max-width: 560px; margin: 48px auto 0; overflow: hidden; box-shadow: 0 0 60px rgba(201,168,76,0.12); }
+    .price-card-top { background: linear-gradient(135deg, var(--gold-dark), var(--gold)); padding: 28px 40px; text-align: center; }
     .price-card-top .label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(0,0,0,0.6); }
     .price-card-top h2 { font-family: var(--font-serif); font-size: 1.6rem; color: var(--black); }
     .price-card-body { padding: 40px; }
-    .price-display {
-      text-align: center; margin-bottom: 32px;
-    }
+    .price-display { text-align: center; margin-bottom: 32px; }
     .price-old { font-size: 1.1rem; color: var(--gray); text-decoration: line-through; margin-bottom: 4px; }
-    .price-main {
-      font-family: var(--font-serif);
-      font-size: clamp(3rem, 8vw, 4.5rem);
-      font-weight: 900; color: var(--white); line-height: 1;
-    }
+    .price-main { font-family: var(--font-serif); font-size: clamp(3rem, 8vw, 4.5rem); font-weight: 900; color: var(--white); line-height: 1; }
     .price-main sup { font-size: 0.45em; vertical-align: top; margin-top: 0.6em; }
     .price-sub { font-size: 0.88rem; color: var(--gray); margin-top: 6px; }
     .price-features { list-style: none; margin-bottom: 32px; }
-    .price-features li {
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      display: flex; align-items: flex-start; gap: 12px;
-      font-size: 0.93rem; color: var(--off-white);
-    }
-    .price-features li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+    .price-features li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: flex-start; gap: 12px; font-size: 0.93rem; color: var(--off-white); }
+    .price-features li::before { content: '\2713'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
     .price-features li:last-child { border-bottom: none; }
-    .price-guarantee {
-      text-align: center;
-      font-size: 0.82rem; color: var(--gray);
-      margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 6px;
-    }
-
-    /* ===== FAQ ===== */
+    .price-guarantee { text-align: center; font-size: 0.82rem; color: var(--gray); margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 6px; }
     .faq-list { margin-top: 48px; }
-    .faq-item {
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-    }
-    .faq-question {
-      width: 100%; background: none; border: none; color: var(--white);
-      font-family: var(--font-sans); font-size: 1rem; font-weight: 600;
-      text-align: left; padding: 22px 0; cursor: pointer;
-      display: flex; justify-content: space-between; align-items: center; gap: 16px;
-    }
-    .faq-question .faq-arrow {
-      color: var(--gold); font-size: 1.2rem; flex-shrink: 0;
-      transition: transform 0.3s;
-    }
+    .faq-item { border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .faq-question { width: 100%; background: none; border: none; color: var(--white); font-family: var(--font-sans); font-size: 1rem; font-weight: 600; text-align: left; padding: 22px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .faq-question .faq-arrow { color: var(--gold); font-size: 1.2rem; flex-shrink: 0; transition: transform 0.3s; }
     .faq-question[aria-expanded="true"] .faq-arrow { transform: rotate(45deg); }
     .faq-answer { display: none; padding-bottom: 20px; color: var(--gray-light); font-size: 0.95rem; }
     .faq-answer.open { display: block; }
-
-    /* ===== FINAL CTA ===== */
-    .final-cta {
-      text-align: center; padding: 100px 0;
-      background: var(--dark);
-      position: relative; overflow: hidden;
-    }
-    .final-cta::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(201,168,76,0.06), transparent);
-    }
+    .final-cta { text-align: center; padding: 100px 0; background: var(--dark); position: relative; overflow: hidden; }
+    .final-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(201,168,76,0.06), transparent); }
     .final-cta h2 { margin-bottom: 16px; }
     .final-cta p { max-width: 560px; margin: 0 auto 36px; font-size: 1.05rem; }
-
-    /* ===== FOOTER ===== */
-    footer {
-      background: var(--black);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 32px 0; text-align: center;
-    }
+    footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.06); padding: 32px 0; text-align: center; }
     footer p { font-size: 0.82rem; color: var(--gray); }
     footer a { color: var(--gray); text-decoration: none; }
     footer a:hover { color: var(--gold); }
     footer .footer-logo { font-family: var(--font-serif); font-size: 1.1rem; color: var(--white); margin-bottom: 12px; display: block; }
     footer .footer-logo span { color: var(--gold); }
-
-    /* ===== ABOUT ===== */
-    .about-grid {
-      display: grid; gap: 48px;
-      grid-template-columns: 1fr;
-      align-items: center; margin-top: 48px;
-    }
+    .about-grid { display: grid; gap: 48px; grid-template-columns: 1fr; align-items: center; margin-top: 48px; }
     @media (min-width: 700px) { .about-grid { grid-template-columns: 1fr 1fr; } }
-    .about-avatar {
-      width: 220px; height: 220px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--dark-3), var(--dark-2));
-      border: 3px solid rgba(201,168,76,0.3);
-      margin: 0 auto;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 5rem;
-      box-shadow: 0 0 40px rgba(201,168,76,0.1);
-    }
+    .about-avatar { width: 220px; height: 220px; border-radius: 50%; background: linear-gradient(135deg, var(--dark-3), var(--dark-2)); border: 3px solid rgba(201,168,76,0.3); margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 5rem; box-shadow: 0 0 40px rgba(201,168,76,0.1); }
     .about-text h2 { margin-bottom: 16px; }
     .about-text p { margin-bottom: 16px; }
     .about-stats { display: flex; gap: 32px; margin-top: 28px; flex-wrap: wrap; }
     .stat-item .num { font-family: var(--font-serif); font-size: 2rem; color: var(--gold); font-weight: 900; }
     .stat-item .label-stat { font-size: 0.8rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.08em; }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 640px) {
-      .section { padding: 64px 0; }
-      .promise-box { padding: 36px 24px; }
-      .price-card-body { padding: 28px 24px; }
-      .mrr-box { padding: 32px 24px; }
-    }
+    @media (max-width: 640px) { .section { padding: 64px 0; } .promise-box { padding: 36px 24px; } .price-card-body { padding: 28px 24px; } .mrr-box { padding: 32px 24px; } }
   </style>
 </head>
 <body>
-
-<!-- NAV -->
 <nav>
   <div class="nav-inner">
     <a href="#" class="nav-logo">Digi<span>Villion</span></a>
-    <a href="#pricing" class="btn btn--gold nav-cta" style="padding: 11px 28px; font-size: 0.88rem;">Jetzt starten →</a>
+    <a href="#pricing" class="btn btn--gold nav-cta" style="padding: 11px 28px; font-size: 0.88rem;">Jetzt starten &rarr;</a>
   </div>
 </nav>
-
-<!-- HERO -->
 <section class="hero">
   <div class="container">
     <div class="hero-badge">Das komplette Online-System</div>
-    <h1>
-      Raus aus dem<br />
-      <em>Hamsterrad.</em><br />
-      Rein ins digitale Business.
-    </h1>
-    <p class="hero-sub">
-      Kein Vorwissen. Kein grosses Startkapital. Kein Zufall.<br />
-      <strong style="color: var(--white);">Der Digitale Ausstieg</strong> gibt dir das komplette System – Schritt für Schritt –
-      um online Geld zu verdienen und dein Leben wirklich zu verändern.
-    </p>
+    <h1>Raus aus dem<br /><em>Hamsterrad.</em><br />Rein ins digitale Business.</h1>
+    <p class="hero-sub">Kein Vorwissen. Kein grosses Startkapital. Kein Zufall.<br /><strong style="color: var(--white);">Der Digitale Ausstieg</strong> gibt dir das komplette System &ndash; Schritt f&uuml;r Schritt &ndash; um online Geld zu verdienen und dein Leben wirklich zu ver&auml;ndern.</p>
     <div class="hero-actions">
-      <a href="#pricing" class="btn btn--gold btn--lg">Jetzt für 497 € einsteigen →</a>
+      <a href="#pricing" class="btn btn--gold btn--lg">Jetzt f&uuml;r 497 &euro; einsteigen &rarr;</a>
       <a href="#system" class="btn btn--outline">Das System ansehen</a>
     </div>
     <div class="hero-trust">
-      <span class="trust-item"><span>🔒</span> Einmalzahlung – lebenslanger Zugang</span>
-      <span class="trust-item"><span>🔄</span> Master Resell Rights inklusive</span>
-      <span class="trust-item"><span>⚡</span> Sofort startklar – direkt nach Kauf</span>
-      <span class="trust-item"><span>🛒</span> Über Digistore24 – sicher & geprüft</span>
+      <span class="trust-item"><span>&#128274;</span> Einmalzahlung &ndash; lebenslanger Zugang</span>
+      <span class="trust-item"><span>&#128260;</span> Master Resell Rights inklusive</span>
+      <span class="trust-item"><span>&#9889;</span> Sofort startklar &ndash; direkt nach Kauf</span>
+      <span class="trust-item"><span>&#128722;</span> &Uuml;ber Digistore24 &ndash; sicher &amp; gepr&uuml;ft</span>
     </div>
   </div>
-  <div class="hero-scroll-hint">↓ Scroll</div>
+  <div class="hero-scroll-hint">&darr; Scroll</div>
 </section>
-
-<!-- PAIN SECTION -->
 <section class="section section--dark">
   <div class="container">
     <div class="text-center">
       <p class="caption">Kommt dir das bekannt vor?</p>
-      <h2 style="margin-bottom: 12px;">Du arbeitest hart –<br />und kommst trotzdem nicht weiter.</h2>
+      <h2 style="margin-bottom: 12px;">Du arbeitest hart &ndash;<br />und kommst trotzdem nicht weiter.</h2>
       <div class="divider"></div>
     </div>
     <div class="pain-grid">
-      <div class="pain-card">
-        <span class="pain-icon">😩</span>
-        <h3>Jeden Monat dasselbe</h3>
-        <p>Aufstehen, arbeiten, schlafen. Kein Raum für deine Träume. Kein Ende in Sicht.</p>
-      </div>
-      <div class="pain-card">
-        <span class="pain-icon">💸</span>
-        <h3>Wenig Geld am Ende des Monats</h3>
-        <p>Du weisst nicht, wie du mehr verdienen kannst – ohne noch mehr Stunden zu opfern.</p>
-      </div>
-      <div class="pain-card">
-        <span class="pain-icon">🤯</span>
-        <h3>Digitales Marketing klingt kompliziert</h3>
-        <p>Funnel, Webinar, Affiliate, MRR – du hast keine Ahnung wo du anfangen sollst.</p>
-      </div>
-      <div class="pain-card">
-        <span class="pain-icon">😰</span>
-        <h3>Kein Kapital zum Starten</h3>
-        <p>Du willst einsteigen, aber hast Angst, Geld zu verlieren – oder weisst nicht wie.</p>
-      </div>
-      <div class="pain-card">
-        <span class="pain-icon">🌍</span>
-        <h3>Träume, die weiter weg rücken</h3>
-        <p>Job kündigen, auswandern, frei sein – alles bleibt ein Wunsch, der nie Realität wird.</p>
-      </div>
-      <div class="pain-card">
-        <span class="pain-icon">🔁</span>
-        <h3>Du hast es schon versucht</h3>
-        <p>Halbherzige Online-Kurse, YouTube-Videos, keine Ergebnisse. Kein echtes System dahinter.</p>
-      </div>
+      <div class="pain-card"><span class="pain-icon">&#128553;</span><h3>Jeden Monat dasselbe</h3><p>Aufstehen, arbeiten, schlafen. Kein Raum f&uuml;r deine Tr&auml;ume. Kein Ende in Sicht.</p></div>
+      <div class="pain-card"><span class="pain-icon">&#128184;</span><h3>Wenig Geld am Ende des Monats</h3><p>Du weisst nicht, wie du mehr verdienen kannst &ndash; ohne noch mehr Stunden zu opfern.</p></div>
+      <div class="pain-card"><span class="pain-icon">&#129327;</span><h3>Digitales Marketing klingt kompliziert</h3><p>Funnel, Webinar, Affiliate, MRR &ndash; du hast keine Ahnung wo du anfangen sollst.</p></div>
+      <div class="pain-card"><span class="pain-icon">&#128560;</span><h3>Kein Kapital zum Starten</h3><p>Du willst einsteigen, aber hast Angst, Geld zu verlieren &ndash; oder weisst nicht wie.</p></div>
+      <div class="pain-card"><span class="pain-icon">&#127757;</span><h3>Tr&auml;ume, die weiter weg r&uuml;cken</h3><p>Job k&uuml;ndigen, auswandern, frei sein &ndash; alles bleibt ein Wunsch, der nie Realit&auml;t wird.</p></div>
+      <div class="pain-card"><span class="pain-icon">&#128257;</span><h3>Du hast es schon versucht</h3><p>Halbherzige Online-Kurse, YouTube-Videos, keine Ergebnisse. Kein echtes System dahinter.</p></div>
     </div>
   </div>
 </section>
-
-<!-- PROMISE SECTION -->
 <section class="section">
   <div class="container--narrow">
     <div class="promise-box">
-      <blockquote>
-        „Was wäre, wenn du ab heute ein <strong>System</strong> hättest, das für dich Geld verdient –
-        während du schläfst, reist oder einfach lebst?"
-      </blockquote>
-      <p class="promise-author">– Mila Wagner, DigiVillion</p>
+      <blockquote>&#8222;Was w&auml;re, wenn du ab heute ein <strong>System</strong> h&auml;ttest, das f&uuml;r dich Geld verdient &ndash; w&auml;hrend du schl&auml;fst, reist oder einfach lebst?&#8220;</blockquote>
+      <p class="promise-author">&ndash; Mila Wagner, DigiVillion</p>
     </div>
   </div>
 </section>
-
-<!-- DREAMS SECTION -->
 <section class="section section--dark">
   <div class="container">
     <div class="text-center">
-      <p class="caption">Was möglich wird</p>
-      <h2 style="margin-bottom: 12px;">Dein Leben in 6–12 Monaten</h2>
+      <p class="caption">Was m&ouml;glich wird</p>
+      <h2 style="margin-bottom: 12px;">Dein Leben in 6&ndash;12 Monaten</h2>
       <div class="divider"></div>
       <p class="lead" style="max-width: 600px; margin: 0 auto;">Das ist kein leeres Versprechen. Das sind echte Ziele, die Kunden mit diesem System erreicht haben.</p>
     </div>
     <div class="dreams-grid" style="margin-top: 48px;">
-      <div class="dream-item">
-        <div class="dream-icon">💰</div>
-        <div>
-          <h4>Mehr Geld im Monat</h4>
-          <p>Viele Teilnehmer verdienen innerhalb weniger Monate deutlich mehr als in ihrem alten Job.</p>
-        </div>
-      </div>
-      <div class="dream-item">
-        <div class="dream-icon">✈️</div>
-        <div>
-          <h4>Auswandern & ortsunabhängig leben</h4>
-          <p>Dein Business läuft online – du kannst von überall auf der Welt arbeiten.</p>
-        </div>
-      </div>
-      <div class="dream-item">
-        <div class="dream-icon">🚪</div>
-        <div>
-          <h4>Den Job kündigen</h4>
-          <p>Nicht irgendwann. Sobald dein Online-Einkommen stabil läuft – auf deine Bedingungen.</p>
-        </div>
-      </div>
-      <div class="dream-item">
-        <div class="dream-icon">⏰</div>
-        <div>
-          <h4>Zeitfreiheit zurückgewinnen</h4>
-          <p>Kein Chef, keine festen Zeiten. Du entscheidest, wann und wie viel du arbeitest.</p>
-        </div>
-      </div>
-      <div class="dream-item">
-        <div class="dream-icon">🤖</div>
-        <div>
-          <h4>Geld verdienen im Schlaf</h4>
-          <p>Dein automatisierter Funnel verkauft 24/7 – auch wenn du nicht am Rechner bist.</p>
-        </div>
-      </div>
-      <div class="dream-item">
-        <div class="dream-icon">👨‍👩‍👧</div>
-        <div>
-          <h4>Mehr Zeit für Familie & Leben</h4>
-          <p>Kein Hamsterrad mehr. Endlich Raum für das, was wirklich wichtig ist.</p>
-        </div>
-      </div>
+      <div class="dream-item"><div class="dream-icon">&#128176;</div><div><h4>Mehr Geld im Monat</h4><p>Viele Teilnehmer verdienen innerhalb weniger Monate deutlich mehr als in ihrem alten Job.</p></div></div>
+      <div class="dream-item"><div class="dream-icon">&#9992;&#65039;</div><div><h4>Auswandern &amp; ortsunabh&auml;ngig leben</h4><p>Dein Business l&auml;uft online &ndash; du kannst von &uuml;berall auf der Welt arbeiten.</p></div></div>
+      <div class="dream-item"><div class="dream-icon">&#128682;</div><div><h4>Den Job k&uuml;ndigen</h4><p>Nicht irgendwann. Sobald dein Online-Einkommen stabil l&auml;uft &ndash; auf deine Bedingungen.</p></div></div>
+      <div class="dream-item"><div class="dream-icon">&#9200;</div><div><h4>Zeitfreiheit zur&uuml;ckgewinnen</h4><p>Kein Chef, keine festen Zeiten. Du entscheidest, wann und wie viel du arbeitest.</p></div></div>
+      <div class="dream-item"><div class="dream-icon">&#129302;</div><div><h4>Geld verdienen im Schlaf</h4><p>Dein automatisierter Funnel verkauft 24/7 &ndash; auch wenn du nicht am Rechner bist.</p></div></div>
+      <div class="dream-item"><div class="dream-icon">&#128106;</div><div><h4>Mehr Zeit f&uuml;r Familie &amp; Leben</h4><p>Kein Hamsterrad mehr. Endlich Raum f&uuml;r das, was wirklich wichtig ist.</p></div></div>
     </div>
   </div>
 </section>
-
-<!-- SYSTEM SECTION -->
 <section id="system" class="section">
   <div class="container">
     <div>
       <p class="caption">Die Methode</p>
-      <h2 style="margin-bottom: 12px;">Der automatisierte<br /><span class="gold">Verkaufstrichter</span> – dein System</h2>
+      <h2 style="margin-bottom: 12px;">Der automatisierte<br /><span class="gold">Verkaufstrichter</span> &ndash; dein System</h2>
       <div class="divider--left divider"></div>
-      <p class="lead" style="max-width: 620px; margin-bottom: 0;">
-        Kein manuelles Verkaufen. Kein täglich posten müssen. Ein einmal aufgebauter Trichter
-        arbeitet rund um die Uhr für dich. So funktioniert das System:
-      </p>
+      <p class="lead" style="max-width: 620px; margin-bottom: 0;">Kein manuelles Verkaufen. Kein t&auml;glich posten m&uuml;ssen. Ein einmal aufgebauter Trichter arbeitet rund um die Uhr f&uuml;r dich.</p>
     </div>
     <div class="system-steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <span class="step-tag">Traffic</span>
-          <h3>Content oder Werbung – du wählst</h3>
-          <p>Ein Reel, ein Post oder eine Facebook-Anzeige weckt Interesse. Du entscheidest, ob du mit organischem Content oder bezahlter Werbung startest. Beide Wege funktionieren.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <span class="step-tag">Landing Page</span>
-          <h3>Interessenten landen auf deiner Seite</h3>
-          <p>Eine professionelle Landing Page (genau wie diese hier) nimmt die E-Mail-Adresse deines Interessenten entgegen. Einfach, klar, überzeugend.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <span class="step-tag">Lead-Sammlung</span>
-          <h3>Automatische E-Mail-Registrierung</h3>
-          <p>Der Interessent trägt sich ein und bekommt sofort eine Einladung zum Webinar – vollautomatisch, ohne dass du irgendetwas tun musst.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-body">
-          <span class="step-tag">Webinar</span>
-          <h3>Automatisiertes Webinar – einmal aufnehmen, immer verkaufen</h3>
-          <p>Du nimmst dein Webinar einmal auf. Es läuft dann immer und immer wieder ab – ohne deine Anwesenheit. Im Webinar präsentierst du deinen Kurs und verkaufst ihn direkt.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">5</div>
-        <div class="step-body">
-          <span class="step-tag">Verkauf</span>
-          <h3>Automatischer Kauf über Digistore24</h3>
-          <p>Der Kauf läuft über Digistore24. Geld kommt rein, der Käufer bekommt sofort Zugang – vollautomatisch. Du bist nicht involviert.</p>
-        </div>
-      </div>
+      <div class="step"><div class="step-num">1</div><div class="step-body"><span class="step-tag">Traffic</span><h3>Content oder Werbung &ndash; du w&auml;hlst</h3><p>Ein Reel, ein Post oder eine Facebook-Anzeige weckt Interesse. Du entscheidest, ob du mit organischem Content oder bezahlter Werbung startest.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><span class="step-tag">Landing Page</span><h3>Interessenten landen auf deiner Seite</h3><p>Eine professionelle Landing Page nimmt die E-Mail-Adresse deines Interessenten entgegen. Einfach, klar, &uuml;berzeugend.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><span class="step-tag">Lead-Sammlung</span><h3>Automatische E-Mail-Registrierung</h3><p>Der Interessent tr&auml;gt sich ein und bekommt sofort eine Einladung zum Webinar &ndash; vollautomatisch.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><span class="step-tag">Webinar</span><h3>Automatisiertes Webinar &ndash; einmal aufnehmen, immer verkaufen</h3><p>Du nimmst dein Webinar einmal auf. Es l&auml;uft dann immer wieder ab &ndash; ohne deine Anwesenheit. Im Webinar verk&auml;ufst du deinen Kurs direkt.</p></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-body"><span class="step-tag">Verkauf</span><h3>Automatischer Kauf &uuml;ber Digistore24</h3><p>Der Kauf l&auml;uft &uuml;ber Digistore24. Geld kommt rein, der K&auml;ufer bekommt sofort Zugang &ndash; vollautomatisch.</p></div></div>
     </div>
   </div>
 </section>
-
-<!-- STRATEGIES SECTION -->
 <section class="section section--dark">
   <div class="container">
     <div class="text-center">
       <p class="caption">2 Wege zum Ziel</p>
-      <h2 style="margin-bottom: 12px;">Mit Content oder ohne –<br />du wählst deine Strategie</h2>
+      <h2 style="margin-bottom: 12px;">Mit Content oder ohne &ndash;<br />du w&auml;hlst deine Strategie</h2>
       <div class="divider"></div>
     </div>
     <div class="strategies-grid">
-      <div class="strategy-card strategy-card--a">
-        <span class="strategy-badge strategy-badge--a">Strategie A</span>
-        <h3>Mit organischem Content</h3>
-        <p style="color: var(--gray-light); font-size: 0.92rem; margin-bottom: 20px;">
-          Nutze Social Media, um kostenlosen Traffic aufzubauen. Ideal wenn du eine Präsenz aufbauen möchtest.
-        </p>
-        <div class="strategy-flow">
-          <div class="strategy-flow-step"><div class="flow-bubble">Reel / Post</div></div>
-          <div class="flow-arrow">↓</div>
-          <div class="strategy-flow-step"><div class="flow-bubble">Landing Page</div></div>
-          <div class="flow-arrow">↓</div>
-          <div class="strategy-flow-step"><div class="flow-bubble">Automatisiertes Webinar</div></div>
-          <div class="flow-arrow">↓</div>
-          <div class="strategy-flow-step"><div class="flow-bubble">Verkauf 💰</div></div>
-        </div>
-      </div>
-      <div class="strategy-card strategy-card--b">
-        <span class="strategy-badge strategy-badge--b">Strategie B</span>
-        <h3>Ohne Content – mit Facebook Ads</h3>
-        <p style="color: var(--gray-light); font-size: 0.92rem; margin-bottom: 20px;">
-          Kein Social Media, kein Kamera-Gesicht. Schalte einfach bezahlte Werbung und lass das System laufen.
-        </p>
-        <div class="strategy-flow">
-          <div class="strategy-flow-step"><div class="flow-bubble">Facebook Anzeige</div></div>
-          <div class="flow-arrow">↓</div>
-          <div class="strategy-flow-step"><div class="flow-bubble">Landing Page</div></div>
-          <div class="flow-arrow">↓</div>
-          <div class="strategy-flow-step"><div class="flow-bubble">Automatisiertes Webinar</div></div>
-          <div class="flow-arrow">↓</div>
-          <div class="strategy-flow-step"><div class="flow-bubble">Verkauf 💰</div></div>
-        </div>
-      </div>
+      <div class="strategy-card strategy-card--a"><span class="strategy-badge strategy-badge--a">Strategie A</span><h3>Mit organischem Content</h3><p style="color: var(--gray-light); font-size: 0.92rem; margin-bottom: 20px;">Nutze Social Media, um kostenlosen Traffic aufzubauen.</p><div class="strategy-flow"><div class="strategy-flow-step"><div class="flow-bubble">Reel / Post</div></div><div class="flow-arrow">&darr;</div><div class="strategy-flow-step"><div class="flow-bubble">Landing Page</div></div><div class="flow-arrow">&darr;</div><div class="strategy-flow-step"><div class="flow-bubble">Automatisiertes Webinar</div></div><div class="flow-arrow">&darr;</div><div class="strategy-flow-step"><div class="flow-bubble">Verkauf &#128176;</div></div></div></div>
+      <div class="strategy-card strategy-card--b"><span class="strategy-badge strategy-badge--b">Strategie B</span><h3>Ohne Content &ndash; mit Facebook Ads</h3><p style="color: var(--gray-light); font-size: 0.92rem; margin-bottom: 20px;">Kein Social Media, kein Kamera-Gesicht. Schalte einfach bezahlte Werbung.</p><div class="strategy-flow"><div class="strategy-flow-step"><div class="flow-bubble">Facebook Anzeige</div></div><div class="flow-arrow">&darr;</div><div class="strategy-flow-step"><div class="flow-bubble">Landing Page</div></div><div class="flow-arrow">&darr;</div><div class="strategy-flow-step"><div class="flow-bubble">Automatisiertes Webinar</div></div><div class="flow-arrow">&darr;</div><div class="strategy-flow-step"><div class="flow-bubble">Verkauf &#128176;</div></div></div></div>
     </div>
   </div>
 </section>
-
-<!-- MODULES SECTION -->
 <section class="section">
   <div class="container">
-    <div class="text-center">
-      <p class="caption">Der Kursinhalt</p>
-      <h2 style="margin-bottom: 12px;">Alles was du brauchst –<br />in einem Kurs</h2>
-      <div class="divider"></div>
-    </div>
+    <div class="text-center"><p class="caption">Der Kursinhalt</p><h2 style="margin-bottom: 12px;">Alles was du brauchst &ndash;<br />in einem Kurs</h2><div class="divider"></div></div>
     <div class="modules-grid">
-      <div class="module-card">
-        <span class="module-num">Modul 01</span>
-        <h3>Grundlagen Digitales Marketing</h3>
-        <ul class="module-list">
-          <li>Was ist digitales Marketing?</li>
-          <li>Wie funktionieren Online-Verkäufe?</li>
-          <li>Mindset & Einstieg ohne Kapital</li>
-          <li>Dein erster Fahrplan</li>
-        </ul>
-      </div>
-      <div class="module-card">
-        <span class="module-num">Modul 02</span>
-        <h3>Content Creation Masterclass</h3>
-        <ul class="module-list">
-          <li>Videos aufnehmen & schneiden</li>
-          <li>KI-Stimme mit ElevenLabs</li>
-          <li>Bilder & Grafiken mit Canva</li>
-          <li>KI-Avatare & Bildgenerierung</li>
-        </ul>
-      </div>
-      <div class="module-card">
-        <span class="module-num">Modul 03</span>
-        <h3>Den Funnel aufbauen</h3>
-        <ul class="module-list">
-          <li>Landing Page erstellen (mit Vorlagen)</li>
-          <li>E-Mail-Automation einrichten</li>
-          <li>Webinar aufnehmen & automatisieren</li>
-          <li>Digistore24 einrichten</li>
-        </ul>
-      </div>
-      <div class="module-card">
-        <span class="module-num">Modul 04</span>
-        <h3>Traffic & Reichweite</h3>
-        <ul class="module-list">
-          <li>Organischer Content auf Social Media</li>
-          <li>Facebook Ads schalten – Schritt für Schritt</li>
-          <li>Zielgruppen aufbauen & targeten</li>
-          <li>Ads auswerten & optimieren</li>
-        </ul>
-      </div>
-      <div class="module-card">
-        <span class="module-num">Modul 05</span>
-        <h3>Verkaufen & Skalieren</h3>
-        <ul class="module-list">
-          <li>Webinar-Verkauf optimieren</li>
-          <li>Conversionrate erhöhen</li>
-          <li>Skalierung mit mehr Traffic</li>
-          <li>Automatisierung ausbauen</li>
-        </ul>
-      </div>
-      <div class="module-card">
-        <span class="module-num">Modul 06</span>
-        <h3>MRR & Weiterverkauf</h3>
-        <ul class="module-list">
-          <li>Was sind Master Resell Rights?</li>
-          <li>Deinen Affiliate-Link aktivieren</li>
-          <li>Den Kurs selbst vermarkten</li>
-          <li>Passives Einkommen durch Weitergabe</li>
-        </ul>
-      </div>
+      <div class="module-card"><span class="module-num">Modul 01</span><h3>Grundlagen Digitales Marketing</h3><ul class="module-list"><li>Was ist digitales Marketing?</li><li>Wie funktionieren Online-Verk&auml;ufe?</li><li>Mindset &amp; Einstieg ohne Kapital</li><li>Dein erster Fahrplan</li></ul></div>
+      <div class="module-card"><span class="module-num">Modul 02</span><h3>Content Creation Masterclass</h3><ul class="module-list"><li>Videos aufnehmen &amp; schneiden</li><li>KI-Stimme mit ElevenLabs</li><li>Bilder &amp; Grafiken mit Canva</li><li>KI-Avatare &amp; Bildgenerierung</li></ul></div>
+      <div class="module-card"><span class="module-num">Modul 03</span><h3>Den Funnel aufbauen</h3><ul class="module-list"><li>Landing Page erstellen (mit Vorlagen)</li><li>E-Mail-Automation einrichten</li><li>Webinar aufnehmen &amp; automatisieren</li><li>Digistore24 einrichten</li></ul></div>
+      <div class="module-card"><span class="module-num">Modul 04</span><h3>Traffic &amp; Reichweite</h3><ul class="module-list"><li>Organischer Content auf Social Media</li><li>Facebook Ads schalten &ndash; Schritt f&uuml;r Schritt</li><li>Zielgruppen aufbauen &amp; targeten</li><li>Ads auswerten &amp; optimieren</li></ul></div>
+      <div class="module-card"><span class="module-num">Modul 05</span><h3>Verkaufen &amp; Skalieren</h3><ul class="module-list"><li>Webinar-Verkauf optimieren</li><li>Conversionrate erh&ouml;hen</li><li>Skalierung mit mehr Traffic</li><li>Automatisierung ausbauen</li></ul></div>
+      <div class="module-card"><span class="module-num">Modul 06</span><h3>MRR &amp; Weiterverkauf</h3><ul class="module-list"><li>Was sind Master Resell Rights?</li><li>Deinen Affiliate-Link aktivieren</li><li>Den Kurs selbst vermarkten</li><li>Passives Einkommen durch Weitergabe</li></ul></div>
     </div>
   </div>
 </section>
-
-<!-- TOOLS SECTION -->
 <section class="section section--darker">
   <div class="container text-center">
-    <p class="caption">Tools & Technologie</p>
-    <h2 style="margin-bottom: 12px;">Diese Tools lernst du meistern</h2>
-    <div class="divider"></div>
-    <p style="color: var(--gray); max-width: 560px; margin: 0 auto 8px;">Keine Vorkenntnisse nötig. Du lernst jeden dieser Tools im Kurs von Null auf.</p>
+    <p class="caption">Tools &amp; Technologie</p><h2 style="margin-bottom: 12px;">Diese Tools lernst du meistern</h2><div class="divider"></div>
+    <p style="color: var(--gray); max-width: 560px; margin: 0 auto 8px;">Keine Vorkenntnisse n&ouml;tig. Du lernst jeden dieser Tools im Kurs von Null auf.</p>
     <div class="tools-grid">
-      <div class="tool-chip"><span>🎬</span> Video-Bearbeitung</div>
-      <div class="tool-chip"><span>🎙️</span> ElevenLabs KI-Stimme</div>
-      <div class="tool-chip"><span>🎨</span> Canva</div>
-      <div class="tool-chip"><span>🤖</span> KI-Bildgenerierung</div>
-      <div class="tool-chip"><span>👤</span> KI-Avatare</div>
-      <div class="tool-chip"><span>📣</span> Facebook Ads Manager</div>
-      <div class="tool-chip"><span>📧</span> E-Mail-Automation</div>
-      <div class="tool-chip"><span>🌐</span> Landing Page Builder</div>
-      <div class="tool-chip"><span>🎥</span> Webinar-Software</div>
-      <div class="tool-chip"><span>🛒</span> Digistore24</div>
+      <div class="tool-chip"><span>&#127916;</span> Video-Bearbeitung</div>
+      <div class="tool-chip"><span>&#127897;&#65039;</span> ElevenLabs KI-Stimme</div>
+      <div class="tool-chip"><span>&#127912;</span> Canva</div>
+      <div class="tool-chip"><span>&#129302;</span> KI-Bildgenerierung</div>
+      <div class="tool-chip"><span>&#128100;</span> KI-Avatare</div>
+      <div class="tool-chip"><span>&#128227;</span> Facebook Ads Manager</div>
+      <div class="tool-chip"><span>&#128231;</span> E-Mail-Automation</div>
+      <div class="tool-chip"><span>&#127760;</span> Landing Page Builder</div>
+      <div class="tool-chip"><span>&#127909;</span> Webinar-Software</div>
+      <div class="tool-chip"><span>&#128722;</span> Digistore24</div>
     </div>
   </div>
 </section>
-
-<!-- INCLUDED SECTION -->
 <section class="section section--dark">
   <div class="container">
-    <div class="text-center">
-      <p class="caption">Was du bekommst</p>
-      <h2 style="margin-bottom: 12px;">Alles auf einmal –<br />kein Extra nötig</h2>
-      <div class="divider"></div>
-    </div>
+    <div class="text-center"><p class="caption">Was du bekommst</p><h2 style="margin-bottom: 12px;">Alles auf einmal &ndash;<br />kein Extra n&ouml;tig</h2><div class="divider"></div></div>
     <div class="included-grid">
-      <div class="included-item">
-        <div class="included-icon">📚</div>
-        <div>
-          <h4>Vollständiger Video-Kurs</h4>
-          <p>Alle Lektionen, klar erklärt, Schritt für Schritt nachmachbar – für komplette Einsteiger.</p>
-        </div>
-      </div>
-      <div class="included-item">
-        <div class="included-icon">📄</div>
-        <div>
-          <h4>Fertige Vorlagen</h4>
-          <p>Landing Page, Webinar-Aufzeichnung, E-Mail-Sequenzen – einfach kopieren und anpassen.</p>
-        </div>
-      </div>
-      <div class="included-item">
-        <div class="included-icon">🔁</div>
-        <div>
-          <h4>Kompletter Verkaufstrichter</h4>
-          <p>Der fertige Funnel – von Traffic bis zum automatischen Verkauf, komplett vorkonfiguriert.</p>
-        </div>
-      </div>
-      <div class="included-item">
-        <div class="included-icon">♾️</div>
-        <div>
-          <h4>Lebenslanger Zugang</h4>
-          <p>Kein Abo, keine monatlichen Kosten. Einmal kaufen – für immer nutzen und alle Updates erhalten.</p>
-        </div>
-      </div>
-      <div class="included-item">
-        <div class="included-icon">💎</div>
-        <div>
-          <h4>Master Resell Rights (MRR)</h4>
-          <p>Verkaufe den Kurs als deinen eigenen weiter und behalte 100 % des Erlöses.</p>
-        </div>
-      </div>
-      <div class="included-item">
-        <div class="included-icon">🔗</div>
-        <div>
-          <h4>Deinen persönlichen Affiliate-Link</h4>
-          <p>Sofort nach dem Kauf aktivierbar. Du kannst direkt starten, den Kurs zu vermarkten.</p>
-        </div>
-      </div>
+      <div class="included-item"><div class="included-icon">&#128218;</div><div><h4>Vollst&auml;ndiger Video-Kurs</h4><p>Alle Lektionen, klar erkl&auml;rt, Schritt f&uuml;r Schritt nachmachbar &ndash; f&uuml;r komplette Einsteiger.</p></div></div>
+      <div class="included-item"><div class="included-icon">&#128196;</div><div><h4>Fertige Vorlagen</h4><p>Landing Page, Webinar-Aufzeichnung, E-Mail-Sequenzen &ndash; einfach kopieren und anpassen.</p></div></div>
+      <div class="included-item"><div class="included-icon">&#128257;</div><div><h4>Kompletter Verkaufstrichter</h4><p>Der fertige Funnel &ndash; von Traffic bis zum automatischen Verkauf, komplett vorkonfiguriert.</p></div></div>
+      <div class="included-item"><div class="included-icon">&#9854;&#65039;</div><div><h4>Lebenslanger Zugang</h4><p>Kein Abo, keine monatlichen Kosten. Einmal kaufen &ndash; f&uuml;r immer nutzen.</p></div></div>
+      <div class="included-item"><div class="included-icon">&#128142;</div><div><h4>Master Resell Rights (MRR)</h4><p>Verkaufe den Kurs als deinen eigenen weiter und behalte 100 % des Erl&ouml;ses.</p></div></div>
+      <div class="included-item"><div class="included-icon">&#128279;</div><div><h4>Pers&ouml;nlicher Affiliate-Link</h4><p>Sofort nach dem Kauf aktivierbar. Du kannst direkt starten, den Kurs zu vermarkten.</p></div></div>
     </div>
   </div>
 </section>
-
-<!-- MRR SECTION -->
 <section class="section">
   <div class="container">
     <div class="mrr-box">
       <p class="caption">Master Resell Rights</p>
-      <h2>Kaufe einmal –<br /><span class="gold">verdiene unbegrenzt</span></h2>
-      <p style="color: var(--gray-light); font-size: 1rem;">
-        Mit dem Kauf des Digitalen Ausstiegs erhältst du nicht nur das Wissen –
-        sondern auch das Recht, den Kurs selbst zu verkaufen und 100 % des Erlöses zu behalten.
-      </p>
+      <h2>Kaufe einmal &ndash;<br /><span class="gold">verdiene unbegrenzt</span></h2>
+      <p style="color: var(--gray-light); font-size: 1rem;">Mit dem Kauf des Digitalen Ausstiegs erh&auml;ltst du nicht nur das Wissen &ndash; sondern auch das Recht, den Kurs selbst zu verkaufen und 100 % des Erl&ouml;ses zu behalten.</p>
       <div class="mrr-steps">
-        <div class="mrr-step">
-          <div class="num">①</div>
-          <p>Kaufe den Kurs einmalig für 497 €</p>
-        </div>
-        <div class="mrr-step">
-          <div class="num">②</div>
-          <p>Aktiviere deinen persönlichen Affiliate-Link</p>
-        </div>
-        <div class="mrr-step">
-          <div class="num">③</div>
-          <p>Vermarkte den Kurs mit dem erlernten System</p>
-        </div>
-        <div class="mrr-step">
-          <div class="num">④</div>
-          <p>Erhalte 100 % des Kaufpreises bei jedem Verkauf</p>
-        </div>
+        <div class="mrr-step"><div class="num">1</div><p>Kaufe den Kurs einmalig f&uuml;r 497 &euro;</p></div>
+        <div class="mrr-step"><div class="num">2</div><p>Aktiviere deinen pers&ouml;nlichen Affiliate-Link</p></div>
+        <div class="mrr-step"><div class="num">3</div><p>Vermarkte den Kurs mit dem erlernten System</p></div>
+        <div class="mrr-step"><div class="num">4</div><p>Erhalte 100 % des Kaufpreises bei jedem Verkauf</p></div>
       </div>
-      <p style="font-size: 0.85rem; color: var(--gray);">
-        Verkaufe 2 Kurse – und hast du deine Investition schon zurück. Ab Verkauf 3 ist alles Gewinn.
-      </p>
+      <p style="font-size: 0.85rem; color: var(--gray);">Verkaufe 2 Kurse &ndash; und hast du deine Investition schon zur&uuml;ck. Ab Verkauf 3 ist alles Gewinn.</p>
     </div>
   </div>
 </section>
-
-<!-- ABOUT SECTION -->
 <section class="section section--dark">
   <div class="container">
     <div class="about-grid">
-      <div class="text-center">
-        <div class="about-avatar">👩</div>
-      </div>
+      <div class="text-center"><div class="about-avatar">&#128105;</div></div>
       <div class="about-text">
         <p class="caption">Deine Kursleiterin</p>
         <h2>Mila Wagner</h2>
         <div class="divider--left divider" style="margin-top: 16px;"></div>
-        <p>Ich bin Mila Wagner, Gründerin von DigiVillion. Ich kenne das Gefühl, im Hamsterrad festzustecken und nicht zu wissen, wie man da rauskommt.</p>
-        <p>Digitales Marketing hat mein Leben verändert – und ich habe ein System entwickelt, das ich dir Schritt für Schritt weitergebe. Ohne Umwege, ohne Theorie, direkt nachmachbar.</p>
+        <p>Ich bin Mila Wagner, Gr&uuml;nderin von DigiVillion. Ich kenne das Gef&uuml;hl, im Hamsterrad festzustecken und nicht zu wissen, wie man da rauskommt.</p>
+        <p>Digitales Marketing hat mein Leben ver&auml;ndert &ndash; und ich habe ein System entwickelt, das ich dir Schritt f&uuml;r Schritt weitergebe. Ohne Umwege, ohne Theorie, direkt nachmachbar.</p>
         <p>Meine Mission: Dir alles in die Hand zu geben, was du brauchst, um dasselbe zu erreichen.</p>
         <div class="about-stats">
-          <div class="stat-item">
-            <div class="num">100%</div>
-            <div class="label-stat">Digitales System</div>
-          </div>
-          <div class="stat-item">
-            <div class="num">24/7</div>
-            <div class="label-stat">Automatisiert</div>
-          </div>
-          <div class="stat-item">
-            <div class="num">497€</div>
-            <div class="label-stat">Einmalzahlung</div>
-          </div>
+          <div class="stat-item"><div class="num">100%</div><div class="label-stat">Digitales System</div></div>
+          <div class="stat-item"><div class="num">24/7</div><div class="label-stat">Automatisiert</div></div>
+          <div class="stat-item"><div class="num">497&euro;</div><div class="label-stat">Einmalzahlung</div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- PRICING SECTION -->
 <section id="pricing" class="section">
   <div class="container">
-    <div class="text-center">
-      <p class="caption">Jetzt einsteigen</p>
-      <h2 style="margin-bottom: 12px;">Dein Investment in die Freiheit</h2>
-      <div class="divider"></div>
-    </div>
+    <div class="text-center"><p class="caption">Jetzt einsteigen</p><h2 style="margin-bottom: 12px;">Dein Investment in die Freiheit</h2><div class="divider"></div></div>
     <div class="price-card">
-      <div class="price-card-top">
-        <p class="label">Der Digitale Ausstieg</p>
-        <h2>Das Komplettpaket</h2>
-      </div>
+      <div class="price-card-top"><p class="label">Der Digitale Ausstieg</p><h2>Das Komplettpaket</h2></div>
       <div class="price-card-body">
-        <div class="price-display">
-          <p class="price-old">Normalpreis: 997 €</p>
-          <div class="price-main"><sup>€</sup>497</div>
-          <p class="price-sub">Einmalzahlung – kein Abo – kein Risiko</p>
-        </div>
+        <div class="price-display"><p class="price-old">Normalpreis: 997 &euro;</p><div class="price-main"><sup>&euro;</sup>497</div><p class="price-sub">Einmalzahlung &ndash; kein Abo &ndash; kein Risiko</p></div>
         <ul class="price-features">
-          <li>Vollständiger Video-Kurs (alle 6 Module)</li>
+          <li>Vollst&auml;ndiger Video-Kurs (alle 6 Module)</li>
           <li>Fertige Landing Page Vorlage</li>
           <li>Kompletter automatisierter Verkaufstrichter</li>
-          <li>Automatisiertes Webinar (Vorlage & Aufzeichnung)</li>
-          <li>E-Mail-Sequenzen – sofort einsatzbereit</li>
-          <li>Facebook Ads Anleitung – Schritt für Schritt</li>
-          <li>Tool-Tutorials: Canva, ElevenLabs, KI-Avatare & mehr</li>
-          <li>Lebenslanger Zugang + alle zukünftigen Updates</li>
+          <li>Automatisiertes Webinar (Vorlage &amp; Aufzeichnung)</li>
+          <li>E-Mail-Sequenzen &ndash; sofort einsatzbereit</li>
+          <li>Facebook Ads Anleitung &ndash; Schritt f&uuml;r Schritt</li>
+          <li>Tool-Tutorials: Canva, ElevenLabs, KI-Avatare &amp; mehr</li>
+          <li>Lebenslanger Zugang + alle zuk&uuml;nftigen Updates</li>
           <li><strong>Master Resell Rights (MRR) inklusive</strong></li>
-          <li>Persönlicher Affiliate-Link auf Digistore24</li>
+          <li>Pers&ouml;nlicher Affiliate-Link auf Digistore24</li>
         </ul>
-        <a href="https://www.digistore24.com" target="_blank" rel="noopener" class="btn btn--gold" style="width: 100%; text-align: center; display: block; padding: 20px;">
-          Jetzt für 497 € kaufen →
-        </a>
-        <p class="price-guarantee">🔒 &nbsp;Sichere Zahlung über Digistore24 &nbsp;·&nbsp; Sofortiger Zugang nach Kauf</p>
+        <a href="https://www.digistore24.com" target="_blank" rel="noopener" class="btn btn--gold" style="width: 100%; text-align: center; display: block; padding: 20px;">Jetzt f&uuml;r 497 &euro; kaufen &rarr;</a>
+        <p class="price-guarantee">&#128274; &nbsp;Sichere Zahlung &uuml;ber Digistore24 &nbsp;&middot;&nbsp; Sofortiger Zugang nach Kauf</p>
       </div>
     </div>
   </div>
 </section>
-
-<!-- FAQ SECTION -->
 <section class="section section--dark">
   <div class="container--narrow">
-    <div class="text-center">
-      <p class="caption">Häufige Fragen</p>
-      <h2 style="margin-bottom: 12px;">Deine Fragen –<br />unsere Antworten</h2>
-      <div class="divider"></div>
-    </div>
+    <div class="text-center"><p class="caption">H&auml;ufige Fragen</p><h2 style="margin-bottom: 12px;">Deine Fragen &ndash;<br />unsere Antworten</h2><div class="divider"></div></div>
     <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false">
-          Ich habe keine Ahnung von digitalem Marketing – ist das für mich geeignet?
-          <span class="faq-arrow">+</span>
-        </button>
-        <div class="faq-answer">
-          Ja, absolut. Der Kurs ist speziell für Einsteiger konzipiert. Wir fangen bei Null an – von der Erklärung, was digitales Marketing überhaupt ist, bis zum fertigen, automatisierten Verkaufssystem. Keine Vorkenntnisse nötig.
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false">
-          Ich habe wenig Geld – kann ich trotzdem starten?
-          <span class="faq-arrow">+</span>
-        </button>
-        <div class="faq-answer">
-          Ja. Das System ist darauf ausgelegt, mit minimalem Startkapital aufgebaut zu werden. Viele Tools haben kostenlose Tarife. Die 497 € für den Kurs sind deine einzige grössere Investition. Und mit den MRR-Rechten kannst du diese mit nur einem einzigen Weiterverkauf schon wieder reinholen.
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false">
-          Wie schnell kann ich erste Einnahmen erzielen?
-          <span class="faq-arrow">+</span>
-        </button>
-        <div class="faq-answer">
-          Das hängt von deinem Einsatz ab. Viele Teilnehmer haben ihren Funnel innerhalb von 2–4 Wochen live. Erste Einnahmen durch Weiterverkauf des Kurses sind oft noch schneller möglich, wenn du aktiv vermarktst.
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false">
-          Was genau sind die Master Resell Rights (MRR)?
-          <span class="faq-arrow">+</span>
-        </button>
-        <div class="faq-answer">
-          Mit dem Kauf erhältst du das Recht, den Kurs unter deinem Namen weiterzuverkaufen – und 100 % des Erlöses zu behalten. Du musst nichts selbst erstellen. Du bekommst deinen persönlichen Affiliate-Link über Digistore24 und kannst sofort starten.
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false">
-          Bekomme ich Zugang zu allen zukünftigen Updates?
-          <span class="faq-arrow">+</span>
-        </button>
-        <div class="faq-answer">
-          Ja. Du zahlst einmal und erhältst lebenslangen Zugang – inklusive aller zukünftigen Aktualisierungen und neuen Inhalten ohne Aufpreis.
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false">
-          Muss ich selbst vor der Kamera erscheinen?
-          <span class="faq-arrow">+</span>
-        </button>
-        <div class="faq-answer">
-          Nein! Du lernst im Kurs, wie du mit KI-Avataren, KI-Stimmen (ElevenLabs) und automatisch generierten Inhalten arbeitest – ganz ohne Kamera und ohne dein Gesicht zu zeigen.
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false">
-          Wie erfolgt die Zahlung?
-          <span class="faq-arrow">+</span>
-        </button>
-        <div class="faq-answer">
-          Die Zahlung läuft sicher über Digistore24 – eine der grössten und vertrauenswürdigsten Zahlungsplattformen im deutschsprachigen Raum. Du erhältst direkt nach dem Kauf Zugang zum Kurs.
-        </div>
-      </div>
+      <div class="faq-item"><button class="faq-question" aria-expanded="false">Ich habe keine Ahnung von digitalem Marketing &ndash; ist das f&uuml;r mich geeignet?<span class="faq-arrow">+</span></button><div class="faq-answer">Ja, absolut. Der Kurs ist speziell f&uuml;r Einsteiger konzipiert. Wir fangen bei Null an &ndash; von der Erkl&auml;rung, was digitales Marketing &uuml;berhaupt ist, bis zum fertigen, automatisierten Verkaufssystem.</div></div>
+      <div class="faq-item"><button class="faq-question" aria-expanded="false">Ich habe wenig Geld &ndash; kann ich trotzdem starten?<span class="faq-arrow">+</span></button><div class="faq-answer">Ja. Das System ist darauf ausgelegt, mit minimalem Startkapital aufgebaut zu werden. Viele Tools haben kostenlose Tarife. Die 497 &euro; sind deine einzige gr&ouml;ssere Investition &ndash; mit einem Weiterverkauf schon wieder drin.</div></div>
+      <div class="faq-item"><button class="faq-question" aria-expanded="false">Wie schnell kann ich erste Einnahmen erzielen?<span class="faq-arrow">+</span></button><div class="faq-answer">Das h&auml;ngt von deinem Einsatz ab. Viele Teilnehmer haben ihren Funnel innerhalb von 2&ndash;4 Wochen live. Erste Einnahmen durch Weiterverkauf sind oft noch schneller m&ouml;glich.</div></div>
+      <div class="faq-item"><button class="faq-question" aria-expanded="false">Was genau sind die Master Resell Rights (MRR)?<span class="faq-arrow">+</span></button><div class="faq-answer">Mit dem Kauf erh&auml;ltst du das Recht, den Kurs weiterzuverkaufen und 100 % des Erl&ouml;ses zu behalten. Du bekommst deinen pers&ouml;nlichen Affiliate-Link &uuml;ber Digistore24 und kannst sofort starten.</div></div>
+      <div class="faq-item"><button class="faq-question" aria-expanded="false">Muss ich selbst vor der Kamera erscheinen?<span class="faq-arrow">+</span></button><div class="faq-answer">Nein! Du lernst, wie du mit KI-Avataren, KI-Stimmen (ElevenLabs) und automatisch generierten Inhalten arbeitest &ndash; ganz ohne Kamera.</div></div>
+      <div class="faq-item"><button class="faq-question" aria-expanded="false">Wie erfolgt die Zahlung?<span class="faq-arrow">+</span></button><div class="faq-answer">Die Zahlung l&auml;uft sicher &uuml;ber Digistore24. Du erh&auml;ltst direkt nach dem Kauf Zugang zum Kurs.</div></div>
     </div>
   </div>
 </section>
-
-<!-- FINAL CTA -->
 <section class="final-cta">
   <div class="container--narrow" style="position: relative; z-index: 1;">
-    <p class="caption">Warte nicht länger</p>
+    <p class="caption">Warte nicht l&auml;nger</p>
     <h2>Dein Ausstieg beginnt heute.</h2>
-    <p>Nicht morgen. Nicht nächste Woche. Jetzt. Mach den ersten Schritt raus aus dem Hamsterrad – mit dem kompletten System an deiner Seite.</p>
-    <a href="#pricing" class="btn btn--gold btn--lg">Jetzt für 497 € einsteigen →</a>
-    <p style="margin-top: 20px; font-size: 0.82rem; color: var(--gray);">Einmalige Investition · Lebenslanger Zugang · MRR inklusive</p>
+    <p>Nicht morgen. Nicht n&auml;chste Woche. Jetzt. Mach den ersten Schritt raus aus dem Hamsterrad &ndash; mit dem kompletten System an deiner Seite.</p>
+    <a href="#pricing" class="btn btn--gold btn--lg">Jetzt f&uuml;r 497 &euro; einsteigen &rarr;</a>
+    <p style="margin-top: 20px; font-size: 0.82rem; color: var(--gray);">Einmalige Investition &middot; Lebenslanger Zugang &middot; MRR inklusive</p>
   </div>
 </section>
-
-<!-- FOOTER -->
 <footer>
   <div class="container">
     <span class="footer-logo">Digi<span>Villion</span></span>
-    <p style="margin-bottom: 8px;">© 2025 DigiVillion · Mila Wagner · Alle Rechte vorbehalten</p>
-    <p>
-      <a href="#">Impressum</a> &nbsp;·&nbsp;
-      <a href="#">Datenschutz</a> &nbsp;·&nbsp;
-      <a href="#">AGB</a>
-    </p>
+    <p style="margin-bottom: 8px;">&copy; 2025 DigiVillion &middot; Mila Wagner &middot; Alle Rechte vorbehalten</p>
+    <p><a href="#">Impressum</a> &nbsp;&middot;&nbsp; <a href="#">Datenschutz</a> &nbsp;&middot;&nbsp; <a href="#">AGB</a></p>
   </div>
 </footer>
-
-<!-- FAQ SCRIPT -->
 <script>
   document.querySelectorAll('.faq-question').forEach(function(btn) {
     btn.addEventListener('click', function() {
@@ -1154,6 +432,5 @@
     });
   });
 </script>
-
 </body>
 </html>
